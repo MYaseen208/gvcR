@@ -2,30 +2,33 @@
 % Please edit documentation in R/gvc_pvar.R
 \name{gvc_pvar}
 \alias{gvc_pvar}
+\alias{gvc_pvar.default}
 \title{Phenotypic Variance}
 \usage{
-gvc_pvar(y, x = NULL, rep, geno, env, data)
+gvc_pvar(.data, .y, .x = NULL, .rep, .gen, .env)
+
+\method{gvc_pvar}{default}(.data, .y, .x = NULL, .rep, .gen, .env)
 }
 \arguments{
-\item{y}{Response}
+\item{.data}{data.frame}
 
-\item{x}{Covariate by default NULL}
+\item{.y}{Response}
 
-\item{rep}{Repliction}
+\item{.x}{Covariate by default NULL}
 
-\item{geno}{Genotypic Factor}
+\item{.rep}{Repliction}
 
-\item{env}{Environmental Factor}
+\item{.gen}{gentypic Factor}
 
-\item{data}{data.frame}
+\item{.env}{Environmental Factor}
 }
 \value{
 Phenotypic Variance
 }
 \description{
 gvc_pvar computes phenotypic variances
-for given traits of different genotypes from replicated data using methodology
- explained by Burton, G. W. & Devane, E. H. (1953) (<doi:10.2134/agronj1953.00021962004500100005x>) and Allard R.W. (1960).
+for given traits of different gentypes from replicated data using methodology
+ explained by Burton, G. W. & Devane, E. H. (1953) and Allard, R.W. (2010).
 }
 \examples{
 set.seed(12345)
@@ -39,28 +42,28 @@ Variety  <- gl(n = 4, k =  4, length = 144, labels = letters[1:4])
 Env      <- gl(n = 3, k = 16, length = 144, labels = letters[1:3])
 df1      <- data.frame(Response, Rep, Variety, Env)
 
-#' # Penotypic Variance
-pvar <-
+# Penotypic Variance
+pvar1 <-
   gvc_pvar(
-            y    = Response
-          , rep  = Rep
-          , geno = Variety
-          , env  = Env
-          , data = df1
+          .data  = df1
+         , .y    = Response
+         , .rep  = Rep
+         , .gen  = Variety
+         , .env  = Env
           )
-pvar
+pvar1
 
 library(eda4treeR)
 data(DataExam6.2)
-pvar <-
+pvar2 <-
   gvc_pvar(
-           y    = Dbh.mean
-         , rep  = Replication
-         , geno = Family
-         , env  = Province
-         , data = DataExam6.2
+          .data  = DataExam6.2
+         , .y    = Dbh.mean
+         , .rep  = Replication
+         , .gen  = Family
+         , .env  = Province
          )
-pvar
+pvar2
 }
 \references{
 \enumerate{

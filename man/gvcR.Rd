@@ -2,12 +2,12 @@
 % Please edit documentation in R/gvcR.R
 \name{gvcR}
 \alias{gvcR}
-\title{Genotypic Variance Components with R}
+\title{Genotypic Variance Components}
 \description{
 Functionalities to compute model based genetic
 components i.e genotypic, phenotypic variances and heritability
 for given traits of different genotypes from replicated data using methodology
- explained by Burton, G. W. & Devane, E. H. (1953) (<doi:10.2134/agronj1953.00021962004500100005x>) and Allard R.W. (1960).
+ explained by Burton, G. W. & Devane, E. H. (1953) (<doi:10.2134/agronj1953.00021962004500100005x>) and Allard, R.W. (2010, ISBN:8126524154).
 }
 \references{
 \enumerate{

@@ -1,19 +1,18 @@
 #' @name    gvc_gvar
 #' @aliases gvc_gvar
-#' @title   Genotypic Variance
-#' @description gvc_gvar computes genotypic variances
-#' for given traits of different genotypes from replicated data using methodology
-#'  explained by Burton, G. W. & Devane, E. H. (1953) (<doi:10.2134/agronj1953.00021962004500100005x>) and Allard R.W. (1960).
+#' @title   gentypic Variance
+#' @description gvc_gvar computes gentypic variances
+#' for given traits of different gentypes from replicated data using methodology
+#'  explained by Burton, G. W. & Devane, E. H. (1953) and Allard, R.W. (2010).
 #'
-#' @param y     Response
-#' @param x     Covariate by default NULL
-#' @param rep   Repliction
-#' @param geno  Genotypic Factor
-#' @param env   Environmental Factor
-#' @param data  data.frame
+#' @param .data  data.frame
+#' @param .y      Response
+#' @param .x      Covariate by default NULL
+#' @param .rep    Repliction
+#' @param .gen   gentypic Factor
+#' @param .env    Environmental Factor
 #'
-#'
-#' @return Genotypic Variance
+#' @return gentypic Variance
 #'
 #'
 #' @author
@@ -36,6 +35,7 @@
 #' @import dplyr
 #' @importFrom magrittr %>%
 #' @import lme4
+#' @import rlang
 #' @import eda4treeR
 #' @importFrom stats anova lm var
 #'
@@ -53,58 +53,72 @@
 #' Env      <- gl(n = 3, k = 16, length = 144, labels = letters[1:3])
 #' df1      <- data.frame(Response, Rep, Variety, Env)
 #'
-#' # Genotypic Variance
-#' gvar <-
+#' # gentypic Variance
+#' gvar1 <-
 #'  gvc_gvar(
-#'            y    = Response
-#'          , rep  = Rep
-#'          , geno = Variety
-#'          , env  = Env
-#'          , data = df1
+#'           .data  = df1
+#'          , .y    = Response
+#'          , .rep  = Rep
+#'          , .gen  = Variety
+#'          , .env  = Env
 #'          )
-#' gvar
+#' gvar1
 #'
 #' library(eda4treeR)
 #' data(DataExam6.2)
-#' gvar <-
+#' gvar2 <-
 #'   gvc_gvar(
-#'            y    = Dbh.mean
-#'          , rep  = Replication
-#'          , geno = Family
-#'          , env  = Province
-#'          , data = DataExam6.2
+#'           .data  = DataExam6.2
+#'          , .y    = Dbh.mean
+#'          , .rep  = Replication
+#'          , .gen  = Family
+#'          , .env  = Province
 #'          )
-#' gvar
+#' gvar2
 
-gvc_gvar <- function(y, x = NULL, rep, geno, env, data) {
+gvc_gvar <- function(.data, .y, .x = NULL, .rep, .gen, .env) {
+  UseMethod("gvc_gvar")
+}
 
-  y         <- enquo(y)
-  x         <- enquo(x)
-  rep       <- enquo(rep)
-  geno      <- enquo(geno)
-  env       <- enquo(env)
+#' @export
+#' @rdname gvc_gvar
 
-  df1 <- data %>%
-    dplyr::group_by(!! rep, !! geno, !! env)%>%
-    dplyr::summarize(
-        Mean  = mean(!! y)
-      , Var   = var(!! y)
-      , Count = length(!! y)
-    )
+gvc_gvar.default <- function(.data, .y, .x = NULL, .rep, .gen, .env) {
 
-  names(df1) <- c("rep", "geno", "env", "Mean", "Var", "Count")
+  .y    <- deparse(substitute(.y))
+  .rep  <- deparse(substitute(.rep))
+  .gen  <- deparse(substitute(.gen))
+  .env  <- deparse(substitute(.env))
+
+
+  df1 <- tibble::as_tibble(data.frame(
+      Env = factor(.data[[.env]])
+    , Gen = factor(.data[[.gen]])
+    , Rep = factor(.data[[.rep]])
+    , Y   = .data[[.y]]
+  ))
+
+
+  df2 <-
+    df1 %>%
+      dplyr::group_by(Rep, Gen, Env)%>%
+      dplyr::summarize(
+          Mean  = mean(Y)
+        , Var   = var(Y)
+        , Count = length(Y)
+      )
 
 
   fm1 <-
         lme4::lmer(
-                     formula = Mean ~ rep + env + (1|geno)
+                     formula = Mean ~ Rep + Env + (1|Gen)
                    , REML    = TRUE
-                   , data    = df1
+                   , data    = df2
                    )
 
   VarCor           <- as.data.frame(lme4::VarCorr(fm1))
   rownames(VarCor) <- VarCor$grp
-  sigma2f          <- c(VarCor["geno", "vcov"])
+  sigma2f          <- c(VarCor["Gen", "vcov"])
   gvar             <- sigma2f
   out  <- list("gvar" = gvar)
   return(out)

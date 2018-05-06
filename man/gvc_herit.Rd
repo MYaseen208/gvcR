@@ -2,30 +2,33 @@
 % Please edit documentation in R/gvc_herit.R
 \name{gvc_herit}
 \alias{gvc_herit}
+\alias{gvc_herit.default}
 \title{Heritability}
 \usage{
-gvc_herit(y, x = NULL, rep, geno, env, data)
+gvc_herit(.data, .y, .x = NULL, .rep, .gen, .env)
+
+\method{gvc_herit}{default}(.data, .y, .x = NULL, .rep, .gen, .env)
 }
 \arguments{
-\item{y}{Response}
+\item{.data}{data.frame}
 
-\item{x}{Covariate by default NULL}
+\item{.y}{Response}
 
-\item{rep}{Repliction}
+\item{.x}{Covariate by default NULL}
 
-\item{geno}{Genotypic Factor}
+\item{.rep}{Repliction}
 
-\item{env}{Environmental Factor}
+\item{.gen}{gentypic Factor}
 
-\item{data}{data.frame}
+\item{.env}{Environmental Factor}
 }
 \value{
 Heritability
 }
 \description{
 gvc_herit computes model based genetic heritability
-for given traits of different genotypes from replicated data using methodology
- explained by Burton, G. W. & Devane, E. H. (1953) (<doi:10.2134/agronj1953.00021962004500100005x>) and Allard R.W. (1960).
+for given traits of different gentypes from replicated data using methodology
+ explained by Burton, G. W. & Devane, E. H. (1953) and Allard, R.W. (2010).
 }
 \examples{
 
@@ -41,27 +44,27 @@ Env      <- gl(n = 3, k = 16, length = 144, labels = letters[1:3])
 df1      <- data.frame(Response, Rep, Variety, Env)
 
 # Heritability
-herit <-
+herit1 <-
   gvc_herit(
-           y    = Response
-         , rep  = Rep
-         , geno = Variety
-         , env  = Env
-         , data = df1
+          .data  = df1
+         , .y    = Response
+         , .rep  = Rep
+         , .gen  = Variety
+         , .env  = Env
          )
-herit
+herit1
 
 library(eda4treeR)
 data(DataExam6.2)
-herit <-
+herit2 <-
   gvc_herit(
-           y    = Dbh.mean
-         , rep  = Replication
-         , geno = Family
-         , env  = Province
-         , data = DataExam6.2
+          .data  = DataExam6.2
+         , .y    = Dbh.mean
+         , .rep  = Replication
+         , .gen  = Family
+         , .env  = Province
          )
-herit
+herit2
 }
 \references{
 \enumerate{
