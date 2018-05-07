@@ -1,4 +1,4 @@
-# gvcR
+# gvcR: Genotypic Variance Components
 ## Introduction
 
 **gvcR** contains functions to calculate Genotypic Variance, Phenotypic Variance and Heritability.
@@ -8,7 +8,7 @@ Use **devtools** to install the development version from Github:
 
 ```{r}
 if(!require("devtools")) install.packages("devtools")
-devtools::install_github('MYaseen208/gvcR', build_vignettes = TRUE)
+devtools::install_github('myaseen208/gvcR', build_vignettes = TRUE)
 ```
 
 ## License
