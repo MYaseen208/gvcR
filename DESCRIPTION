@@ -22,6 +22,7 @@ Imports:
 License: GPL-3
 URL: https://myaseen208.com/gvcR/
      https://github.com/MYaseen208/gvcR
+BugReports: https://github.com/myaseen208/gvcR/issues
 LazyData: TRUE
 RoxygenNote: 7.3.2
 Encoding: UTF-8
