@@ -1,0 +1,107 @@
+---
+output: rmarkdown::github_document
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "",
+  fig.path = "inst/extdata/"
+)
+```
+# `gvcR`: Genotypic Variance Components
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+devtools::load_all(".")
+```
+
+###### Version : [`r getNamespaceVersion("gvcR")`](https://myaseen208.com/gvcR/);  License: [GPL-3](https://www.r-project.org/Licenses/)
+
+
+##### *Muhammad Yaseen^1,2,3^, Sami Ullah^4^
+
+
+1. [Asian Development Bank (ADB), Islamabad, Pakistan](https://myaseen208.com/)
+2. [Benazir Income Support Programme (BISP), Islamabad, Pakistan](https://myaseen208.com/)
+3. [Department of Mathematics and Statistics, University of Agriculture Faisalabad, Pakistan](https://myaseen208.com/)
+4. College of Agriculutre, University of Sargodha, Pakistan
+
+***
+
+[![minimal R version](https://img.shields.io/badge/R>%3D-2.10.0-6666ff.svg)](https://cran.r-project.org/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version-last-release/gvcR)](https://cran.r-project.org/package=gvcR)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/gvcR?color=green)](https://CRAN.R-project.org/package=gvcR)
+<!-- [![packageversion](https://img.shields.io/badge/Package%20version-0.2.3.3-orange.svg)](https://github.com/myaseen208/gvcR) -->
+
+```{r, results='asis', echo=FALSE}
+dver <- ifelse(test = gsub("(.\\.)(\\d+)(\\..)", "", getNamespaceVersion("gvcR")) != "",
+               yes = getNamespaceVersion("gvcR"),
+               no = gsub("Version:\\s*", "", readLines(paste0("https://raw.githubusercontent.com/", "myaseen208/gvcR", "/master/DESCRIPTION"))[grep("Version:", readLines(paste0("https://raw.githubusercontent.com/", "myaseen208/gvcR", "/master/DESCRIPTION")))]))
+cat(paste("[![develVersion](https://img.shields.io/badge/devel%20version-", dver, "-orange.svg)](https://github.com/myaseen208/gvcR)", sep = ""))
+```
+
+<!-- [![GitHub Download Count](https://github-basic-badges.herokuapp.com/downloads/myaseen208/gvcR/total.svg)] -->
+[![Project Status: WIP](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](https://github.com/myaseen208/gvcR)
+
+***
+
+## Description
+`r gsub("(<doi:)(.+)(>)", "[doi:\\2](https://doi.org/\\2)", gsub("\\n", " ", packageDescription("gvcR", fields = "Description")))`
+
+&nbsp;
+&nbsp;
+
+
+## Installation
+The package can be installed from CRAN as follows:
+
+```{r, eval=FALSE}
+install.packages("gvcR", dependencies = TRUE)
+```
+
+
+&nbsp;
+
+
+The development version can be installed from github as follows:
+
+```{r, eval=FALSE}
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("myaseen208/gvcR")
+```
+
+&nbsp;
+&nbsp;
+
+
+
+## What's new
+To know whats new in this version type:
+
+```{r, eval=FALSE}
+news(package = "gvcR")
+```
+
+## Links
+
+[CRAN page](https://cran.r-project.org/package=gvcR)
+
+[Github page](https://github.com/myaseen208/gvcR)
+
+[Documentation website](https://myaseen208.com/gvcR/)
+
+[Companion website](https://myaseen208.com/EDATR/)
+
+
+
+## Citing `gvcR`
+To cite the R package `gvcR` in publications use:
+
+
+```{r, comment = ""}
+citation("gvcR")
+```
+
