@@ -1,3 +1,8 @@
+# Changes in gvcR Version 0.4.0
+## New Features 
+
+* Updated the DESCRIPTION file to meet the requirements of CRAN
+
 # Changes in gvcR Version 0.3.0
 ## New Features 
 

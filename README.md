@@ -81,8 +81,6 @@ news(package = "gvcR")
 
 [Documentation website](https://myaseen208.com/gvcR/)
 
-[Companion website](https://myaseen208.com/EDATR/)
-
 ## Citing `gvcR`
 
 To cite the R package `gvcR` in publications use:
